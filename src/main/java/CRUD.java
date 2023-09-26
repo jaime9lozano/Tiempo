@@ -24,7 +24,7 @@ import java.util.UUID;
             }
             return instance;
         }
-
+        //MANITO COMPRUEBA SI ESTA BIEN, CREO QUE LO ESTÁ 
         public List<Clima> findAll() throws SQLException {
             List<Clima> tiempos = new ArrayList<>();
             ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM tiempos");
