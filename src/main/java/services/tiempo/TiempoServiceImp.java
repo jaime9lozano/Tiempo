@@ -9,7 +9,7 @@ import repository.climas.TiempoRepository;
 import java.sql.SQLException;
 import java.util.*;
 
-public class TiempoServiceImp extends TiempoService{
+public class TiempoServiceImp implements TiempoService{
 
     // Para mi cache
     private static final int CACHE_SIZE = 10; // Tamaño de la cache
@@ -29,6 +29,9 @@ public class TiempoServiceImp extends TiempoService{
                 return size() > CACHE_SIZE;
             }
         };
+    }
+
+    public TiempoServiceImp() {
     }
 
 
@@ -75,7 +78,7 @@ public class TiempoServiceImp extends TiempoService{
         // Guardamos en la base de datos
         clima = tiempoRepository.save(clima);
         // Guardamos en la cache
-        cache.put(clima.getCodigo(), clima);
+        cache.put(clima.getId(), clima);
         return clima;
     }
 
@@ -85,7 +88,7 @@ public class TiempoServiceImp extends TiempoService{
         // Actualizamos en la base de datos
         clima = tiempoRepository.update(clima);
         // Actualizamos en la cache
-        cache.put(clima.getCodigo(), clima);
+        cache.put(clima.getId(), clima);
         return clima;
     }
 

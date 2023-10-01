@@ -75,7 +75,6 @@ public class TiempoRepositoryImpl implements TiempoRepository{
             var rs = stmt.executeQuery();
             var lista = new ArrayList<Clima>();
             while (rs.next()) {
-                // Creamos un alumno
                 Clima c = Clima.builder()
                         .codigo(rs.getObject("codigo", UUID.class))
                         .localidad(rs.getString("localidad")
@@ -104,18 +103,16 @@ public class TiempoRepositoryImpl implements TiempoRepository{
             var rs = stmt.executeQuery();
             Optional<Clima> cli = Optional.empty();
             while (rs.next()) {
-                // Creamos un alumno
                 cli = Optional.of(Clima.builder()
                         .codigo(rs.getObject("codigo", UUID.class))
                         .localidad(rs.getString("localidad")
                                 .provincia(rs.getString("provincia")
-                                        .tempMax(rs.getDouble("tempMax"))
-                                        .tempMin(rs.getDouble("tempMin"))
-                                        .horaTMax(rs.getObject("horaTMax"), LocalDateTime.class)
-                                        .horaTemMin(rs.getObject("horaTemMin"), LocalDateTime.class)
-                                        .precipitacion(rs.getBoolean("precipitacion"))
-                                        .build();
-                );
+                                .tempMax(rs.getDouble("tempMax"))
+                                .tempMin(rs.getDouble("tempMin"))
+                                .horaTMax(rs.getObject("horaTMax"), LocalDateTime.class)
+                                .horaTemMin(rs.getObject("horaTemMin"), LocalDateTime.class)
+                                .precipitacion(rs.getBoolean("precipitacion"))
+                                .build();
             }
             return cli;
         }
@@ -147,35 +144,38 @@ public class TiempoRepositoryImpl implements TiempoRepository{
     @Override
     public Clima update(Clima clima) throws SQLException, ClimaNoEncotradoException {
         logger.debug("Actualizando el alumno: " + clima);
-        String query = "UPDATE ALUMNOS SET nombre =?, calificacion =?, updated_at =? WHERE id =?";
+        String query = "UPDATE TIEMPOS SET localidad =?, provincia=?, tempMax =?, horaTempMax=?, tempMin=?, horaTemMin=?, precipitacion=?, codigo=? WHERE id =?";
         try (var connection = db.getConnection();
              var stmt = connection.prepareStatement(query)
         ) {
             // Vamos a crear los datos de la consultaue necesitamos para insertar automaticos aunque los crea la base de datos
-            alumno.setUpdatedAt(LocalDateTime.now());
-            stmt.setString(1, alumno.getNombre());
-            stmt.setDouble(2, alumno.getCalificacion());
-            stmt.setObject(3, alumno.getUpdatedAt());
-            stmt.setLong(4, alumno.getId());
+            clima.setUpdatedAt(LocalDateTime.now());
+            stmt.setString(1, clima.getLocalidad());
+            stmt.setString(2, clima.getProvincia());
+            stmt.setDouble(3, clima.getTempMax());
+            stmt.setObject(4, clima.getHoraTMax());
+            stmt.setDouble(5, clima.getTempMin());
+            stmt.setObject(6, clima.getHoraTemMin());
+            stmt.setBoolean(7, clima.isPrecipitacion());
+            stmt.setObject(8, clima.getCodigo());
 
 
-            JAIME SE ME HA APAGADO EL MOVIL XDD  Y NO SE ENVIAN LOS MENSAJES DE DISCORD DESCANSITO PARA IR AL BAÑO XDD
             var res = stmt.executeUpdate();
             if (res > 0) {
-                logger.debug("Alumno actualizado");
+                logger.debug("Tiempo actualizado");
             } else {
-                logger.error("Alumno no actualizado al no encontrarse en la base de datos con id: " + alumno.getId());
-                throw new AlumnoNoEncotradoException("Alumno/a no encontrado con id: " + alumno.getId());
+                logger.error("Tiempo no actualizado al no encontrarse en la base de datos con id: " + clima.getId());
+                throw new ClimaNoEncotradoException("Alumno/a no encontrado con id: " + clima.getId());
             }
         }
-        return alumno;
+        return clima;
     }
 
 
     @Override
     public boolean deleteById(Long id) throws SQLException {
-        logger.debug("Borrando el alumno con id: " + id);
-        String query = "DELETE FROM ALUMNOS WHERE id =?";
+        logger.debug("Borrando el clima con id: " + id);
+        String query = "DELETE FROM TIEMPOS WHERE id =?";
         try (var connection = db.getConnection();
              var stmt = connection.prepareStatement(query)
         ) {
@@ -187,8 +187,8 @@ public class TiempoRepositoryImpl implements TiempoRepository{
 
     @Override
     public void deleteAll() throws SQLException {
-        logger.debug("Borrando todos los alumnos");
-        String query = "DELETE FROM ALUMNOS";
+        logger.debug("Borrando todos los tiempos");
+        String query = "DELETE FROM TIEMPOS";
         try (var connection = db.getConnection();
              var stmt = connection.prepareStatement(query)
         ) {

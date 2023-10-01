@@ -5,10 +5,10 @@ import java.util.Optional;
 public interface CrudRepository <T, ID, EX extends Exception> {
     // Métodos que vamos a usar
     // Guardar
-    T save(T t) throws SQLException, EX;
+    T save(T t) throws SQLException, Exception;
 
     // Actualizar
-    T update(T t) throws SQLException, EX;
+    T update(T t) throws SQLException, Exception;
 
     // Buscar por ID
     Optional<T> findById(ID id) throws SQLException;
