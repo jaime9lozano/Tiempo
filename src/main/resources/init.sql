@@ -7,6 +7,6 @@ CREATE TABLE IF NOT EXISTS tiempos (
     horaTMax TIME(0) NOT NULL,
     tempMin NUMERIC(4,2) NOT NULL,
     horaTemMin TIME(0) NOT NULL,
-    boolean precipitacion,
+    precipìtacion BOOLEAN,
     codigo UUID NOT NULL
 );
