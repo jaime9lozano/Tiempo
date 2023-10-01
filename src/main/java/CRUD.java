@@ -36,8 +36,8 @@ import java.util.UUID;
                         resultSet.getString("provincia"),
                         resultSet.getDouble("tempMax"),
                         resultSet.getDouble("tempMin"),
-                        resultSet.getTime("horaTMax"),
-                        resultSet.getTime("horaTemMin"),
+                        resultSet.getTime("horaTMax").toLocalTime(),
+                        resultSet.getTime("horaTemMin").toLocalTime(),
                         resultSet.getBoolean("precipitacion")
                 ));
             }
@@ -56,8 +56,8 @@ import java.util.UUID;
                         resultSet.getString("provincia"),
                         resultSet.getDouble("tempMax"),
                         resultSet.getDouble("tempMin"),
-                        resultSet.getTime("horaTMax"),
-                        resultSet.getTime("horaTemMin"),
+                        resultSet.getTime("horaTMax").toLocalTime(),
+                        resultSet.getTime("horaTemMin").toLocalTime(),
                         resultSet.getBoolean("precipitacion")
                 ));
             } else {
