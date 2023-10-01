@@ -17,4 +17,50 @@ public class Clima {
     public Clima(UUID codigo, String localidad, String provincia, double temMax, double temMin, LocalTime horaTMax, LocalTime horaTemMin, boolean precipitacion) {
         this.codigo=UUID.randomUUID();
     }
+
+    public String getLocalidad() {
+        return localidad;
+    }
+
+    @Override
+    public String toString() {
+        return "Clima{" +
+                "localidad='" + localidad + '\'' +
+                ", provincia='" + provincia + '\'' +
+                ", tempMax=" + tempMax +
+                ", horaTMax=" + horaTMax +
+                ", tempMin=" + tempMin +
+                ", horaTemMin=" + horaTemMin +
+                ", precipitacion=" + precipitacion +
+                ", codigo=" + codigo +
+                '}';
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public double getTempMax() {
+        return tempMax;
+    }
+
+    public LocalTime getHoraTMax() {
+        return horaTMax;
+    }
+
+    public double getTempMin() {
+        return tempMin;
+    }
+
+    public LocalTime getHoraTemMin() {
+        return horaTemMin;
+    }
+
+    public boolean isPrecipitacion() {
+        return precipitacion;
+    }
+
+    public UUID getCodigo() {
+        return codigo;
+    }
 }
