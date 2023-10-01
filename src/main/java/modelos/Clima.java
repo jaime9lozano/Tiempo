@@ -1,8 +1,14 @@
 package modelos;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+
 import java.time.LocalTime;
 import java.util.UUID;
-
+@Builder
+@AllArgsConstructor
+@Data
 public class Clima {
     String localidad;
     String provincia;

@@ -4,6 +4,7 @@ import exceptions.ClimaException;
 import modelos.Clima;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import repository.climas.TiempoRepository;
 
 import java.sql.SQLException;
 import java.util.*;
@@ -19,7 +20,7 @@ public class TiempoServiceImp extends TiempoService{
     private final TiempoRepository tiempoRepository;
 
     private TiempoServiceImpl(TiempoRepository tiempoRepository) {
-        this.alumnosRepository = alumnosRepository;
+        this.tiempoRepository = tiempoRepository;
         // Inicializamos la cache con el tamaño y la política de borrado de la misma
         // borramos el más antiguo cuando llegamos al tamaño máximo
         this.cache = new LinkedHashMap<>(CACHE_SIZE, 0.75f, true) {
@@ -40,13 +41,13 @@ public class TiempoServiceImp extends TiempoService{
 
     @Override
     public List<Clima> findAll() throws SQLException {
-        logger.debug("Obteniendo todos los climas");
-        return alumnosRepository.findAll();
+        logger.debug("Obteniendo todos los repository.climas");
+        return tiempoRepository.findAll();
     }
 
     @Override
     public List<Clima> findAllByProvincia(String nombre) throws SQLException {
-        logger.debug("Obteniendo todos los climas ordenados por nombre de provincia");
+        logger.debug("Obteniendo todos los repository.climas ordenados por nombre de provincia");
 
         return tiempoRepository.findByProvincia(nombre);
     }
