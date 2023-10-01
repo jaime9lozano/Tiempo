@@ -24,4 +24,4 @@ public interface TiempoService {
 
         void deleteAll() throws SQLException;
     }
-}
+
